@@ -1,16 +1,14 @@
-import { terminal } from "terminal-kit"
-import Fusca from "./Fusca"
 
-export default function corrida(){
-    const carro = new Fusca()
-
+import Carro from "./Carro"//abstração
+export default function corrida(carro: Carro, logger:(str: string)=> void){
+ //classes concretas devem depênder de abstração(interface/classe abstrata)
 
     Array.from({length: 10}).forEach(() => {
         carro.acelerar()
-        terminal.red(`\n Velocidade: ${carro.velocidadeAtual}`)
+        logger(`\n Velocidade: ${carro.velocidadeAtual}`)
     })
     Array.from({length: 10}).forEach(() => {
         carro.frear()
-        terminal.red(`\n Velocidade: ${carro.velocidadeAtual}`)
+        logger(`\n Velocidade: ${carro.velocidadeAtual}`)
     })
 }
