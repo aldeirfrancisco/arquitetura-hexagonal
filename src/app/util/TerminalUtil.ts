@@ -22,6 +22,10 @@ export default class TerminalUtil {
         terminal.clear();
     }
 
+    static exibeChaveValor(chave: string, valor: string){
+        terminal.yellow(chave).green(valor).white(' ')
+    }
+
     static async selecao(texto: string, opcoes: string[]): Promise<[number , string]>{
         terminal.yellow(`\n${texto}`)
         const resposta = await  terminal.singleLineMenu(opcoes).promise
