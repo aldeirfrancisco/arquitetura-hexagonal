@@ -1,6 +1,7 @@
 import { terminal } from 'terminal-kit'
 export default class TerminalUtil {
-
+  
+    
     static async menu(opcoes: string []): Promise<[number, string]>{
          const resposta = await terminal
           .singleColumnMenu(opcoes)
