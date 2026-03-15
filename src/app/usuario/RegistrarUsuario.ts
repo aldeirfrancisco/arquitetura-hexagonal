@@ -2,6 +2,7 @@ import Usuario from "@/core/Usuario/model/Usuario";
 import TerminalUtil from "../util/TerminalUtil";
 import RegistrarUsuario from "@/core/Usuario/service/RegistrarUsuario"
 import InverterSenhaCripto from "@/adapter/auth/InverterSenhaCripto";
+import EspacoSenhaCripto from "@/adapter/auth/EspacoSenhaCripto";
 
 export default async function registrarUsuario() {
     TerminalUtil.titulo("Registrar Usuario");
@@ -9,7 +10,7 @@ export default async function registrarUsuario() {
     const email = await TerminalUtil.campoRequerido('Email: ', 'aldeir.silva@gamil.com')
      const senha = await TerminalUtil.campoRequerido('Senha: ','1234567')
      const usuario: Usuario = { nome, email, senha}
-     const provedorCripto = new InverterSenhaCripto()
+     const provedorCripto = new EspacoSenhaCripto()
      const casoUso = new RegistrarUsuario(provedorCripto) // não depende diretamente de inverterSenhaCripto. depende da interface que inverterSenha cripto implementa.
      casoUso.executar(usuario)
 

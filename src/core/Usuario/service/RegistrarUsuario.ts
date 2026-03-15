@@ -19,7 +19,7 @@ export default class RegistrarUsuario implements CasoDeUso <Usuario, void>{
 
       if(usuarioExistente) throw new Error(Erros.USUARIO_JA_EXISTE)
        
-        const novoUsuario = {
+        const novoUsuario = { 
             id: Id.gerarHash(),
             nome: usuario.nome,
             email: usuario.email,
