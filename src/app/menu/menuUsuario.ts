@@ -1,7 +1,6 @@
 import TerminalUtil from "@/app/util/TerminalUtil";
-import menuPrincipal from "./menuPrincipal";
-import polimorfismo from "../fundamentos/polimorfismo";
-import RegistrarUsuario from "../usuario/RegistrarUsuario";
+
+import registrarUsuario from "../usuario/RegistrarUsuario";
 
 export default async function menuUsuario() {
     TerminalUtil.titulo('Usuário');
@@ -11,7 +10,7 @@ export default async function menuUsuario() {
     ])
 
     switch (index) {
-        case 0: await RegistrarUsuario()
+        case 0: await registrarUsuario()
           break
         default:
           return
