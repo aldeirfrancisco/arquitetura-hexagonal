@@ -1,7 +1,8 @@
-import Usuario from "../../core/Usuario/model/Usuario";
+
+import Usuario from "@/core/Usuario/model/Usuario";
 import db from "./db";
 
-export default class RepositorioUsairoPg{
+export default class RepositorioUsuarioPg{
 
    async inserir(usuario: Usuario){
         await db.query(

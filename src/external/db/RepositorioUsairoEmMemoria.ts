@@ -1,4 +1,4 @@
-import Usuario from "../../core/Usuario/model/Usuario";
+import Usuario from "../../core/usuario/model/Usuario";
 
 export default class RepositorioUsairoEmMemoria{
    private static readonly items: Usuario[] = []
