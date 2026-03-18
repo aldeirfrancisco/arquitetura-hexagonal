@@ -5,7 +5,7 @@ export default class ResgistrarUsuarioController{
          servidor: Express,
          casoDeUso: RegistrarUsuario
     ){
-        servidor.post('/api/usuario/registrar',async (req, resp)=>{
+        servidor.post('/api/usuarios/registrar',async (req, resp)=>{
             try {
             await casoDeUso.executar({
                 nome:req.body.nome,

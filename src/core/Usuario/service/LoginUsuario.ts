@@ -6,17 +6,18 @@ import Erros from "@/core/shared/Erros";
 import ProvedorCriptoGrafia from "./ProvedorCriptoGrafia";
 
 export type Entrada ={email:string, senha:string}
-export type Saida ={usuario:Usuario, token:string}
+//export type Saida ={usuario:Usuario, token:string}
 
 export default class LoginUsuario implements
- CasoDeUso<Entrada, Saida>{
+ CasoDeUso<Entrada, Usuario>{
   
     constructor(
-        private repositorio: RepositorioUsuario,
-        private provedorCripto: ProvedorCriptoGrafia
+         private provedorCripto: ProvedorCriptoGrafia,
+        private repositorio: RepositorioUsuario
+       
     ){}
 
-  async executar(entrada:Entrada):Promise<Saida>{
+  async executar(entrada:Entrada):Promise<Usuario>{
        const usuarioExistente = await this.repositorio
        .buscarPorEmail(entrada.email)
 
@@ -33,9 +34,8 @@ export default class LoginUsuario implements
             throw new Error(Erros.SENHA_INCORRETA)
         }
 
-        return {
-            usuario: {...usuarioExistente,senha: undefined},
-            token: ''
-        }
+        return  {...usuarioExistente,senha: undefined}
+        
+       
   }
 }

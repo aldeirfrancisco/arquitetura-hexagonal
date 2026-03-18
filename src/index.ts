@@ -3,8 +3,11 @@
 import express from  'express'
 import ResgistrarUsuarioController from './external/api/ResgistrarUsuarioController'
 import RepositorioUsuarioPg from './external/db/RepositorioUsuarioPg'
-import RegistrarUsuario from './core/usuario/service/RegistrarUsuario'
+
 import SenhaCripto from './external/auth/SenhaCripto'
+import RegistrarUsuario from './core/usuario/service/RegistrarUsuario'
+import LoginUsuario from './core/usuario/service/LoginUsuario'
+import LoginUsuarioController from './external/api/LoginUsuarioController'
 
 
 const app = express()
@@ -17,10 +20,16 @@ app.listen(porta,()=>{
 })
 //------------------Rotas abertas -------------------------
 const repositorioUsuario = new RepositorioUsuarioPg()
-const provedorCriptografia = new SenhaCripto()
+const provedorCripto = new SenhaCripto()
 const registrarUsuario = new RegistrarUsuario(
-                        provedorCriptografia,
-                        repositorioUsuario
+                       provedorCripto,
+                       repositorioUsuario
                 )
-                
+
+ const loginUsuario = new LoginUsuario(
+                        provedorCripto,
+                        repositorioUsuario
+                    )
+
     new ResgistrarUsuarioController(app,registrarUsuario)
+    new LoginUsuarioController(app,loginUsuario)

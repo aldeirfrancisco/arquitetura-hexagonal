@@ -1,8 +1,11 @@
 
-import Usuario from "@/core/Usuario/model/Usuario";
-import db from "./db";
 
-export default class RepositorioUsuarioPg{
+import Usuario from "@/core/usuario/model/Usuario";
+import db from "./db";
+import RepositorioUsuario from "@/core/usuario/service/RepositorioUsuario";
+
+
+export default class RepositorioUsuarioPg implements RepositorioUsuario{
 
    async inserir(usuario: Usuario){
         await db.query(
@@ -15,7 +18,7 @@ export default class RepositorioUsuarioPg{
         )
        }
 
-    async bsucarPorEmail(email: string): Promise<Usuario | null>{
+    async buscarPorEmail(email: string): Promise<Usuario | null>{
          const usuario = await db.oneOrNone(
             'select * from usuarios where email = $1',
             [email]
