@@ -8,6 +8,10 @@ import SenhaCripto from './external/auth/SenhaCripto'
 import RegistrarUsuario from './core/usuario/service/RegistrarUsuario'
 import LoginUsuario from './core/usuario/service/LoginUsuario'
 import LoginUsuarioController from './external/api/LoginUsuarioController'
+import ObterProdutoPorId from './core/produto/service/ObterProdutoPorId'
+import ObterProdutoPorIdControler from './external/api/ObterProdutoPorIdControler'
+
+
 
 
 const app = express()
@@ -33,3 +37,8 @@ const registrarUsuario = new RegistrarUsuario(
 
     new ResgistrarUsuarioController(app,registrarUsuario)
     new LoginUsuarioController(app,loginUsuario)
+
+    // ------------------Rotas protegidas -------------------------
+
+   const obterProdutoPorId = new ObterProdutoPorId()
+   new ObterProdutoPorIdControler(app, obterProdutoPorId)
