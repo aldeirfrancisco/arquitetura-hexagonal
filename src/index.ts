@@ -10,6 +10,7 @@ import LoginUsuario from './core/usuario/service/LoginUsuario'
 import LoginUsuarioController from './external/api/LoginUsuarioController'
 import ObterProdutoPorId from './core/produto/service/ObterProdutoPorId'
 import ObterProdutoPorIdControler from './external/api/ObterProdutoPorIdControler'
+import UsuarioMiddleware from './external/api/UsuarioMiddleware'
 
 
 
@@ -39,6 +40,6 @@ const registrarUsuario = new RegistrarUsuario(
     new LoginUsuarioController(app,loginUsuario)
 
     // ------------------Rotas protegidas -------------------------
-
+   const usuarioMid = UsuarioMiddleware(repositorioUsuario);
    const obterProdutoPorId = new ObterProdutoPorId()
-   new ObterProdutoPorIdControler(app, obterProdutoPorId)
+   new ObterProdutoPorIdControler(app, obterProdutoPorId, usuarioMid)

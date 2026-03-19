@@ -7,13 +7,17 @@ import ObterProdutoPorId from "@/core/produto/service/ObterProdutoPorId";
 export default class ObterProdutoPorIdControler{
     constructor(
          servidor: Express,
-         casoDeUso: ObterProdutoPorId  
+         casoDeUso: ObterProdutoPorId,
+         ...middlewares:any[] 
         
     ){
-        servidor.post('/api/produtos/:id',async (req, resp)=>{
+        servidor.post('/api/produtos/:id',...middlewares,async (req, resp)=>{
             try {
                const produto =  await casoDeUso
-               .executar((req.params as any).id)             
+               .executar({
+                produtoId: req.params.id,
+                usuario: (req as any).usuario
+               })             
                 resp.status(200).send(produto);
 
                 } catch (erro: any){

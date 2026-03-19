@@ -1,22 +1,28 @@
 import CasoDeUso from "@/core/shared/CasoDeUso"
 import Produto from "../model/Produto"
-import ProvedorCriptoGrafia from "@/core/usuario/service/ProvedorCriptoGrafia"
-import RepositorioUsuario from "@/core/usuario/service/RepositorioUsuario"
+import Usuario from "@/core/usuario/model/Usuario"
 
 
-export type Entrada ={id:string}
+export type Entrada = {
+  produtoId: string,
+  usuario: Usuario
+}
+
+
+//export type Entrada ={id:string}
 //export type Saida ={produto:Produto}
 
 
 export default class ObterProdutoPorId implements
- CasoDeUso<string, Produto>{
+ CasoDeUso<Entrada, Produto>{
 
 
-  async executar(id:string): Promise<Produto>{
+  async executar(entrada:Entrada): Promise<Produto>{
         return {
-          id:'1',
+          id: entrada.produtoId,
           nome: 'Produto 1',
-          preco: 10.99
+          preco: 10.99 , 
+          consultaPor: entrada.usuario.email
         }
   }
 }
