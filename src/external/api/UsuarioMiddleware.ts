@@ -1,0 +1,32 @@
+ import {Request, Response, NextFunction} from 'express'
+import ProverdorJWT from '../provedorJWT/ProvedorJwt'
+import Usuario from '@/core/usuario/model/Usuario'
+import RepositorioUsairoEmMemoria from '../db/RepositorioUsairoEmMemoria'
+export default function UsuarioMiddleware( repositorio: RepositorioUsairoEmMemoria){
+
+    return async(req: Request, resp: Response, next: NextFunction) =>{
+        const acessoNegado = () => resp.status(403).send('Token inválido')
+
+        const token = req.headers
+               .authorization?.replace('Bearer','' )
+
+        if(!token){
+            acessoNegado()
+            return
+        }
+        
+        const provedorJwt = new ProverdorJWT(process.env.Jwt_SECRET!)
+
+        const usuarioToken = provedorJwt.obter(token) as Usuario
+        const usuario = repositorio.bsucarPorEmail(usuarioToken.email)
+
+        if(!usuario){
+            acessoNegado()
+            return
+        }
+
+       (req as any).usuario = usuario
+       
+      next()
+    }
+}
